@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+
+const emociones = [
+  // Emociones positivas
+  {name: 'Feliz', color: "bg-red-900", path: '/feliz'},
+  {name: 'Alegre', color: "bg-orange-900", path: '/alegre'},
+  {name: 'Gratitud', color: "bg-green-900", path: '/gratitud'},
+  
+  // Emociones neutras/complejas
+  {name: 'Confundida', color: "bg-emerald-900", path: '/confundida'},
+
+  
+  // Emociones difíciles
+  {name: 'Triste', color: "bg-sky-900", path: '/triste'},
+  {name: 'Enojada', color: "bg-blue-900", path: '/enojada'},
+  {name: 'Con Miedo', color: "bg-indigo-900", path: '/con-miedo'},
+  {name: 'Decepcionada', color: "bg-purple-900", path: '/decepcionada'},
+  {name: 'Sola', color: "bg-fuchsia-900", path: '/sola'},
+  {name: 'Estresada', color: "bg-pink-900", path: '/estresada'},
+];
+
+---
+
+<Layout title='Ábrelo cada vez que te sientas...' description=''>
+  <main class="min-h-screen w-full flex items-center justify-center">
+
+    <div class="flex-1 flex items-center justify-center px-4 py-8">
+      <div class="text-center max-w-4xl mx-auto animate-fade-in">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-cream-50 mb-2 leading-tight text-white">
+          Ábrelo cada vez
+        </h1>
+        <h2 class="text-3xl md:text-5xl lg:text-6xl font-light text-cream-100 mb-16 italic text-gray-400">
+          que te sientas...
+        </h2>
+  
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          {emociones.map((emotion, index) => (
+            <a 
+              href={emotion.path}
+              class={`animate-slide-up bg-gradient-to-br ${emotion.color} text-white px-6 py-5 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 focus:ring-4 focus:ring-cream-50 focus:ring-opacity-50 group`}
+              style={`animation-delay: ${index * 0.05}s`}
+              aria-label={`Explorar cuando te sientes ${emotion.name}`}
+            >
+              <span class="text-lg md:text-xl font-medium capitalize group-hover:scale-105 inline-block transition-transform duration-300">
+                {emotion.name}
+              </span>
+            </a>
+          ))}
+        </div>
+  
+        <div class="mt-16 animate-fade-in" style="animation-delay: 0.8s">
+          <p class="text-cream-200 text-lg md:text-xl italic max-w-2xl mx-auto leading-relaxed text-white">
+            Cada emoción es una puerta hacia tu mundo interior. 
+            Permítete sentir, explorar y abrazar cada parte de ti.
+          </p>
+          <p class="text-cream-200 text-lg md:text-xl mt-4 max-w-2xl mx-auto leading-relaxed text-white">
+            Elaborado por el amor de tu vida, David Acedo.❤️
+          </p>
+        </div>
+  
+      </div>
+  
+    </div>
+  </main>
+</Layout>
+
+

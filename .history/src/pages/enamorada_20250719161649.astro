@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title='Cuando te sientes Enamorada 💕' description='Un espacio especial para celebrar el amor'>
+  <main class="min-h-screen w-full relative overflow-hidden">
+    
+    <!-- Fondo suave con colores rosas -->
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-200 via-rose-200 to-fuchsia-200"></div>
+    
+    <!-- Partículas suaves -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particle absolute w-2 h-2 bg-pink-300 rounded-full opacity-40 animate-bounce" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+      <div class="particle absolute w-3 h-3 bg-rose-300 rounded-full opacity-50 animate-bounce" style="top: 30%; left: 80%; animation-delay: 1s;"></div>
+      <div class="particle absolute w-1 h-1 bg-fuchsia-300 rounded-full opacity-40 animate-bounce" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+      <div class="particle absolute w-2 h-2 bg-pink-400 rounded-full opacity-30 animate-bounce" style="top: 70%; left: 70%; animation-delay: 0.5s;"></div>
+      <div class="particle absolute w-3 h-3 bg-rose-400 rounded-full opacity-35 animate-bounce" style="top: 40%; left: 50%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
+      <div class="text-center max-w-5xl mx-auto">
+        
+        <!-- Título principal con animación -->
+        <div class="mb-8 animate-fade-in">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-pink-800 mb-4 drop-shadow-lg">
+            💕 Enamorada 💕
+          </h1>
+          <p class="text-xl md:text-2xl text-pink-700 font-light italic">
+            El amor que sientes es mágico y hermoso
+          </p>
+        </div>
+
+        <!-- Sección de fotos -->
+        <div class="mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Foto 1 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-pink-100 to-rose-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-enamorada-1.jpg" 
+                  alt="Momentos románticos juntos" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-pink-700">
+                  <span class="text-4xl mb-2">💕</span>
+                  <p class="text-sm text-center">Momentos románticos juntos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 2 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-rose-100 to-fuchsia-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-enamorada-2.jpg" 
+                  alt="Tu mirada de amor" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-rose-700">
+                  <span class="text-4xl mb-2">🥰</span>
+                  <p class="text-sm text-center">Tu mirada de amor</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 3 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-fuchsia-100 to-pink-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-enamorada-3.jpg" 
+                  alt="Citas especiales" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-fuchsia-700">
+                  <span class="text-4xl mb-2">💖</span>
+                  <p class="text-sm text-center">Citas especiales</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje principal -->
+        <div class="bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 mb-8 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="text-pink-900 space-y-6">
+            <p class="text-lg md:text-xl leading-relaxed">
+              Cuando te sientes enamorada, todo el universo se llena de magia y belleza. 
+              Tu amor es el regalo más precioso que he recibido, y cada día me enamoro 
+              más de ti. Tu corazón es mi hogar y tu amor mi mayor tesoro.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed">
+              Me encanta verte enamorada, con esa mirada que derrite mi corazón y esa 
+              sonrisa que ilumina mi mundo. Tu amor me hace sentir completo y me da 
+              la fuerza para ser mejor cada día. Eres mi sueño hecho realidad.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed font-medium">
+              ¡Te amo más cada día, mi amor! 💕✨
+            </p>
+          </div>
+        </div>
+
+        <!-- Frases especiales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gradient-to-r from-pink-300 to-rose-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.4s;">
+            <p class="text-pink-900 text-lg font-medium">
+              "Tu amor es mi mayor tesoro" 💎
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-rose-300 to-fuchsia-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.5s;">
+            <p class="text-pink-900 text-lg font-medium">
+              "Contigo, cada día es romántico" 🌹
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-fuchsia-300 to-pink-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.6s;">
+            <p class="text-pink-900 text-lg font-medium">
+              "Tu amor es mi inspiración" ✨
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-pink-300 to-rose-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.7s;">
+            <p class="text-pink-900 text-lg font-medium">
+              "Eres mi amor eterno" 💝
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="animate-fade-in" style="animation-delay: 0.8s;">
+          <a 
+            href="/" 
+            class="inline-block bg-pink-600/80 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 border-2 border-pink-500/30 hover:border-pink-500/50"
+          >
+            ← Volver al inicio
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .particle {
+    animation: bounce 3s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+</style> 

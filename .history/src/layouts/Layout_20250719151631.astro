@@ -1,0 +1,226 @@
+---
+import '@fontsource-variable/josefin-sans'
+import "../styles/global.css";
+
+export interface Props{
+  title: string;
+  description: string;
+}
+
+const { title, description = "Un espacio para que vengas cuando te identifiques con alguna emoción" } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+		
+		<!-- Elementos de audio ocultos -->
+		<div id="audioPlayers" class="hidden">
+			<audio id="song1" src="/audio/DoBetter.mp3" preload="auto"></audio>
+			<audio id="song2" src="/audio/420.mp3" preload="auto"></audio>
+			<audio id="song3" src="/audio/Momento.mp3" preload="auto"></audio>
+		</div>
+
+		<!-- Control de audio flotante -->
+		<button 
+			id="audioControl"
+			class="fixed bottom-4 right-4 z-50 bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
+			title="Controlar música"
+		>
+			<span id="audioIcon">🎵</span>
+		</button>
+
+		<slot />
+
+		<script>
+			// Sistema de reproducción aleatoria automática
+			class AudioManager {
+				constructor() {
+					this.audios = [
+						{ id: 'song1', src: '/audio/DoBetter.mp3' },
+						{ id: 'song2', src: '/audio/420.mp3' },
+						{ id: 'song3', src: '/audio/Momento.mp3' }
+					];
+					this.currentAudioIndex = 0;
+					this.isPlaying = false;
+					this.isMuted = false;
+					this.audioElement = null;
+					this.controlButton = document.getElementById('audioControl');
+					this.audioIcon = document.getElementById('audioIcon');
+					
+					this.init();
+				}
+
+				init() {
+					// Crear el primer elemento de audio
+					this.createAudioElement();
+					
+					// Configurar eventos
+					this.setupEventListeners();
+					
+					// Iniciar reproducción automática después de un pequeño delay
+					setTimeout(() => {
+						this.playRandomAudio();
+					}, 1000);
+				}
+
+				createAudioElement() {
+					// Eliminar audio anterior si existe
+					if (this.audioElement) {
+						this.audioElement.remove();
+					}
+
+					// Crear nuevo elemento de audio
+					this.audioElement = new Audio();
+					this.audioElement.preload = 'auto';
+					this.audioElement.volume = 0.3; // Volumen moderado
+					
+					// Configurar eventos del audio
+					this.audioElement.addEventListener('ended', () => {
+						this.playNextRandom();
+					});
+
+					this.audioElement.addEventListener('error', () => {
+						console.log('Error reproduciendo audio, intentando siguiente...');
+						this.playNextRandom();
+					});
+				}
+
+				setupEventListeners() {
+					if (this.controlButton) {
+						this.controlButton.addEventListener('click', () => {
+							this.togglePlayPause();
+						});
+					}
+
+					// Permitir interacción del usuario para iniciar audio
+					document.addEventListener('click', () => {
+						if (!this.isPlaying && !this.isMuted) {
+							this.playRandomAudio();
+						}
+					}, { once: true });
+
+					document.addEventListener('touchstart', () => {
+						if (!this.isPlaying && !this.isMuted) {
+							this.playRandomAudio();
+						}
+					}, { once: true });
+				}
+
+				playRandomAudio() {
+					if (this.isMuted) return;
+					
+					const randomIndex = Math.floor(Math.random() * this.audios.length);
+					this.currentAudioIndex = randomIndex;
+					this.playAudio(randomIndex);
+				}
+
+				playNextRandom() {
+					if (this.isMuted) return;
+					
+					// Obtener siguiente índice aleatorio (diferente al actual)
+					let nextIndex;
+					do {
+						nextIndex = Math.floor(Math.random() * this.audios.length);
+					} while (nextIndex === this.currentAudioIndex && this.audios.length > 1);
+					
+					this.currentAudioIndex = nextIndex;
+					this.playAudio(nextIndex);
+				}
+
+				playAudio(index) {
+					const audio = this.audios[index];
+					this.audioElement.src = audio.src;
+					
+					this.audioElement.play().then(() => {
+						this.isPlaying = true;
+						this.updateIcon();
+					}).catch(error => {
+						console.log('Error reproduciendo audio:', error);
+						// Intentar con el siguiente audio
+						setTimeout(() => {
+							this.playNextRandom();
+						}, 1000);
+					});
+				}
+
+				togglePlayPause() {
+					if (this.isMuted) {
+						this.unmute();
+					} else if (this.isPlaying) {
+						this.pause();
+					} else {
+						this.resume();
+					}
+				}
+
+				pause() {
+					if (this.audioElement) {
+						this.audioElement.pause();
+						this.isPlaying = false;
+						this.updateIcon();
+					}
+				}
+
+				resume() {
+					if (this.audioElement && !this.isMuted) {
+						this.audioElement.play().then(() => {
+							this.isPlaying = true;
+							this.updateIcon();
+						});
+					}
+				}
+
+				mute() {
+					this.isMuted = true;
+					this.isPlaying = false;
+					if (this.audioElement) {
+						this.audioElement.pause();
+					}
+					this.updateIcon();
+				}
+
+				unmute() {
+					this.isMuted = false;
+					this.playRandomAudio();
+				}
+
+				updateIcon() {
+					if (this.audioIcon) {
+						if (this.isMuted) {
+							this.audioIcon.textContent = '🔇';
+						} else if (this.isPlaying) {
+							this.audioIcon.textContent = '⏸️';
+						} else {
+							this.audioIcon.textContent = '▶️';
+						}
+					}
+				}
+			}
+
+			// Inicializar el gestor de audio cuando el DOM esté listo
+			document.addEventListener('DOMContentLoaded', () => {
+				new AudioManager();
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title='Cuando te sientes Enamorada 💕' description='Un espacio especial para celebrar tu amor'>
+  <main class="min-h-screen w-full relative overflow-hidden">
+    
+    <!-- Fondo suave con colores naranjas oscuros -->
+    <div class="absolute inset-0 bg-gradient-to-br from-yellow-900 via-orange-800 to-amber-800"></div>
+    
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
+      <div class="text-center max-w-5xl mx-auto">
+        
+        <!-- Título principal con animación -->
+        <div class="mb-8 animate-fade-in">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-yellow-100 mb-4 drop-shadow-lg">
+            💕 Enamorada 💕
+          </h1>
+          <p class="text-xl md:text-2xl text-yellow-200 font-light italic">
+            Tu amor ilumina mi corazón
+          </p>
+        </div>
+
+        <!-- Sección de fotos -->
+        <div class="mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Foto 1 - Puedes reemplazar el src con tu foto -->
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-yellow-800 to-orange-800 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/1.jpg" 
+                  alt="Momento romántico juntos" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-yellow-200">
+                  <span class="text-4xl mb-2">💕</span>
+                  <p class="text-sm text-center">Momento romántico juntos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 2 -->
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-orange-800 to-amber-800 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/2.jpg" 
+                  alt="Tu mirada enamorada" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-orange-200">
+                  <span class="text-4xl mb-2">😍</span>
+                  <p class="text-sm text-center">Tu mirada enamorada</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 3 -->
+            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-amber-800 to-yellow-800 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/3.jpg" 
+                  alt="Momentos de amor" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-amber-200">
+                  <span class="text-4xl mb-2">💖</span>
+                  <p class="text-sm text-center">Momentos de amor</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje principal -->
+        <div class="bg-white/20 backdrop-blur-md rounded-3xl p-8 md:p-12 mb-8 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="text-yellow-100 space-y-6">
+            <p class="text-lg md:text-xl leading-relaxed">
+              Cuando te sientes enamorada, el mundo entero se llena de magia. 
+              Tu mirada me hace perder el aliento, y cada latido de tu corazón 
+              resuena con el mío en perfecta armonía.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed">
+              Verte enamorada es el espectáculo más hermoso que he presenciado. 
+              Tu amor me hace sentir completo, y cada momento que pasamos juntos 
+              es un tesoro que guardo en lo más profundo de mi alma.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed font-medium">
+              ¡Que nuestro amor sea eterno, mi vida! 💕
+            </p>
+          </div>
+        </div>
+
+        <!-- Frases especiales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gradient-to-r from-yellow-700 to-orange-700 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.4s;">
+            <p class="text-yellow-100 text-lg font-medium">
+              "Tu amor es mi mayor tesoro" 💎
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-orange-700 to-amber-700 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.5s;">
+            <p class="text-yellow-100 text-lg font-medium">
+              "Contigo, cada día es una aventura de amor" 🚀
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-amber-700 to-yellow-700 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.6s;">
+            <p class="text-yellow-100 text-lg font-medium">
+              "Tu amor es mi canción favorita" 🎵
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-yellow-700 to-orange-700 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.7s;">
+            <p class="text-yellow-100 text-lg font-medium">
+              "Eres mi razón para amar" 💕
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="animate-fade-in" style="animation-delay: 0.8s;">
+          <a 
+            href="/" 
+            class="inline-block bg-yellow-800/80 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-yellow-800 transition-all duration-300 transform hover:scale-105 border-2 border-yellow-600/30 hover:border-yellow-600/50"
+          >
+            ← Volver al inicio
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .particle {
+    animation: bounce 3s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+</style>

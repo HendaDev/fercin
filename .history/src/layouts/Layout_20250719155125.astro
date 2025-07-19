@@ -1,0 +1,278 @@
+---
+import '@fontsource-variable/josefin-sans'
+import "../styles/global.css";
+
+export interface Props{
+  title: string;
+  description: string;
+}
+
+const { title, description = "Un espacio para que vengas cuando te identifiques con alguna emoción" } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+		
+		<!-- Elementos de audio ocultos -->
+		<div id="audioPlayers" class="hidden">
+			<audio id="song1" src="/audio/DoBetter.mp3" preload="auto"></audio>
+			<audio id="song2" src="/audio/420.mp3" preload="auto"></audio>
+			<audio id="song3" src="/audio/Momento.mp3" preload="auto"></audio>
+		</div>
+
+		<!-- Control de audio flotante -->
+		<button 
+			id="audioControl"
+			class="fixed bottom-4 right-4 z-50 bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
+			title="Controlar música"
+		>
+			<span id="audioIcon">🎵</span>
+		</button>
+
+		<slot />
+
+		<script>
+			// Sistema de reproducción aleatoria automática
+			class AudioManager {
+				constructor() {
+					// @ts-ignore
+					this.audios = [
+						{ id: 'song1', src: '/audio/DoBetter.mp3' },
+						{ id: 'song2', src: '/audio/420.mp3' },
+						{ id: 'song3', src: '/audio/Momento.mp3' }
+					];
+					// @ts-ignore
+					this.currentAudioIndex = 0;
+					// @ts-ignore
+					this.isPlaying = false;
+					// @ts-ignore
+					this.isMuted = false;
+					// @ts-ignore
+					this.audioElement = null;
+					// @ts-ignore
+					this.controlButton = document.getElementById('audioControl');
+					// @ts-ignore
+					this.audioIcon = document.getElementById('audioIcon');
+					
+					this.init();
+				}
+
+				init() {
+					// Crear el primer elemento de audio
+					this.createAudioElement();
+					
+					// Configurar eventos
+					this.setupEventListeners();
+					
+					// Iniciar reproducción automática después de un pequeño delay
+					setTimeout(() => {
+						this.playRandomAudio();
+					}, 1000);
+				}
+
+				createAudioElement() {
+					// Eliminar audio anterior si existe
+					// @ts-ignore
+					if (this.audioElement) {
+						// @ts-ignore
+						this.audioElement.remove();
+					}
+
+					// Crear nuevo elemento de audio
+					// @ts-ignore
+					this.audioElement = new Audio();
+					// @ts-ignore
+					this.audioElement.preload = 'auto';
+					// @ts-ignore
+					this.audioElement.volume = 0.3; // Volumen moderado
+					
+					// Configurar eventos del audio
+					// @ts-ignore
+					this.audioElement.addEventListener('ended', () => {
+						this.playNextRandom();
+					});
+
+					// @ts-ignore
+					this.audioElement.addEventListener('error', () => {
+						console.log('Error reproduciendo audio, intentando siguiente...');
+						this.playNextRandom();
+					});
+				}
+
+				setupEventListeners() {
+					// @ts-ignore
+					if (this.controlButton) {
+						// @ts-ignore
+						this.controlButton.addEventListener('click', () => {
+							this.togglePlayPause();
+						});
+					}
+
+					// Permitir interacción del usuario para iniciar audio
+					document.addEventListener('click', () => {
+						// @ts-ignore
+						if (!this.isPlaying && !this.isMuted) {
+							this.playRandomAudio();
+						}
+					}, { once: true });
+
+					document.addEventListener('touchstart', () => {
+						// @ts-ignore
+						if (!this.isPlaying && !this.isMuted) {
+							this.playRandomAudio();
+						}
+					}, { once: true });
+				}
+
+				playRandomAudio() {
+					// @ts-ignore
+					if (this.isMuted) return;
+					
+					// @ts-ignore
+					const randomIndex = Math.floor(Math.random() * this.audios.length);
+					// @ts-ignore
+					this.currentAudioIndex = randomIndex;
+					this.playAudio(randomIndex);
+				}
+
+				playNextRandom() {
+					// @ts-ignore
+					if (this.isMuted) return;
+					
+					// Obtener siguiente índice aleatorio (diferente al actual)
+					let nextIndex;
+					do {
+						// @ts-ignore
+						nextIndex = Math.floor(Math.random() * this.audios.length);
+						// @ts-ignore
+					} while (nextIndex === this.currentAudioIndex && this.audios.length > 1);
+					
+					// @ts-ignore
+					this.currentAudioIndex = nextIndex;
+					this.playAudio(nextIndex);
+				}
+
+				playAudio(index: any) {
+					// @ts-ignore
+					const audio = this.audios[index];
+					// @ts-ignore
+					if (this.audioElement) {
+						// @ts-ignore
+						this.audioElement.src = audio.src;
+						
+						// @ts-ignore
+						this.audioElement.play().then(() => {
+							// @ts-ignore
+							this.isPlaying = true;
+							this.updateIcon();
+						}).catch((error: any) => {
+							console.log('Error reproduciendo audio:', error);
+							// Intentar con el siguiente audio
+							setTimeout(() => {
+								this.playNextRandom();
+							}, 1000);
+						});
+					}
+				}
+
+				togglePlayPause() {
+					// @ts-ignore
+					if (this.isMuted) {
+						this.unmute();
+					// @ts-ignore
+					} else if (this.isPlaying) {
+						this.pause();
+					} else {
+						this.resume();
+					}
+				}
+
+				pause() {
+					// @ts-ignore
+					if (this.audioElement) {
+						// @ts-ignore
+						this.audioElement.pause();
+						// @ts-ignore
+						this.isPlaying = false;
+						this.updateIcon();
+					}
+				}
+
+				resume() {
+					// @ts-ignore
+					if (this.audioElement && !this.isMuted) {
+						// @ts-ignore
+						this.audioElement.play().then(() => {
+							// @ts-ignore
+							this.isPlaying = true;
+							this.updateIcon();
+						});
+					}
+				}
+
+				mute() {
+					// @ts-ignore
+					this.isMuted = true;
+					// @ts-ignore
+					this.isPlaying = false;
+					// @ts-ignore
+					if (this.audioElement) {
+						// @ts-ignore
+						this.audioElement.pause();
+					}
+					this.updateIcon();
+				}
+
+				unmute() {
+					// @ts-ignore
+					this.isMuted = false;
+					this.playRandomAudio();
+				}
+
+				updateIcon() {
+					// @ts-ignore
+					if (this.audioIcon) {
+						// @ts-ignore
+						if (this.isMuted) {
+							// @ts-ignore
+							this.audioIcon.textContent = '🔇';
+						// @ts-ignore
+						} else if (this.isPlaying) {
+							// @ts-ignore
+							this.audioIcon.textContent = '⏸️';
+						} else {
+							// @ts-ignore
+							this.audioIcon.textContent = '▶️';
+						}
+					}
+				}
+			}
+
+			// Inicializar el gestor de audio cuando el DOM esté listo
+			document.addEventListener('DOMContentLoaded', () => {
+				new AudioManager();
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		font-family: 'Josefin Sans Variable', 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	}
+</style>

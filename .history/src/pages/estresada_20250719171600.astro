@@ -1,0 +1,171 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title='Cuando te sientes Estresada 😰' description='Un espacio especial para celebrar tu felicidad'>
+  <main class="min-h-screen w-full relative overflow-hidden">
+    
+    <!-- Fondo suave con colores rojos -->
+    <div class="absolute inset-0 bg-gradient-to-br from-red-200 via-rose-200 to-pink-200"></div>
+    
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
+      <div class="text-center max-w-5xl mx-auto">
+        
+        <!-- Título principal con animación -->
+        <div class="mb-8 animate-fade-in">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-red-800 mb-4 drop-shadow-lg">
+            😰 Estresada 😰
+          </h1>
+          <p class="text-xl md:text-2xl text-red-700 font-light italic">
+            Si el día te pesa, déjame ser el lugar donde puedas descansar sin miedo
+          </p>
+        </div>
+
+        <!-- Sección de fotos -->
+        <div class="mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Foto 1 - Puedes reemplazar el src con tu foto -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-red-100 to-rose-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/1.jpg" 
+                  alt="Momento feliz juntos" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-red-700">
+                  <span class="text-4xl mb-2">📸</span>
+                  <p class="text-sm text-center">Foto feliz juntos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 2 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-rose-100 to-pink-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/2.jpg" 
+                  alt="Tu sonrisa hermosa" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-rose-700">
+                  <span class="text-4xl mb-2">😊</span>
+                  <p class="text-sm text-center">Tu sonrisa hermosa</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 3 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-pink-100 to-red-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/3.jpg" 
+                  alt="Momentos especiales" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-pink-700">
+                  <span class="text-4xl mb-2">💕</span>
+                  <p class="text-sm text-center">Momentos especiales</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje principal -->
+        <div class="bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 mb-8 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="text-red-900 space-y-6">
+            <p class="text-lg md:text-xl leading-relaxed">
+              Amor, sé que estás dando lo mejor de ti, y aun así, a veces todo parece colapsar. El estrés se acumula en los hombros, en la mente, en el alma. Y tú, tan fuerte, tan dedicada, olvidas a veces que también mereces pausa, que no todo depende de ti. Ojalá pudiera estar ahí ahora mismo para decirte al oído que está bien parar, que está bien respirar… que no necesitas cargar con tanto tú sola.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed">
+              No quiero exigirte nada cuando ya estás llena de exigencias. Solo quiero que te sientas en casa conmigo, aunque sea desde la distancia. Si el día fue duro, si el cuerpo duele y la mente no para, yo quiero ser tu lugar seguro. Ven a mí con todo lo que sientes, sin filtros. Porque no me enamora solo tu risa, también me enamora tu cansancio… porque incluso ahí sigues siendo tú, y yo te amo igual.
+            </p>
+
+          </div>
+        </div>
+
+        <!-- Frases especiales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gradient-to-r from-red-300 to-rose-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.4s;">
+            <p class="text-red-900 text-lg font-medium">
+              "Puedes bajar los brazos conmigo… aquí no hay juicio, solo amor." 💎
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-rose-300 to-pink-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.5s;">
+            <p class="text-red-900 text-lg font-medium">
+              "No necesitas ser fuerte todo el tiempo; yo también puedo sostenerte." 🚀
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-pink-300 to-red-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.6s;">
+            <p class="text-red-900 text-lg font-medium">
+              "Tu paz me importa más que cualquier logro." 🎵
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-red-300 to-rose-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.7s;">
+            <p class="text-red-900 text-lg font-medium">
+              "Estoy contigo, incluso cuando el mundo te exige demasiado."😊
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="animate-fade-in" style="animation-delay: 0.8s;">
+          <a 
+            href="/" 
+            class="inline-block bg-red-600/80 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-red-600 transition-all duration-300 transform hover:scale-105 border-2 border-red-500/30 hover:border-red-500/50"
+          >
+            ← Volver al inicio
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .particle {
+    animation: bounce 3s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+</style>

@@ -1,0 +1,186 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title='Cuando te sientes Tranquila 🌿' description='Un espacio sereno para tu paz interior'>
+  <main class="min-h-screen w-full relative overflow-hidden">
+    
+    <!-- Fondo suave con colores teal -->
+    <div class="absolute inset-0 bg-gradient-to-br from-teal-100 via-cyan-100 to-emerald-100"></div>
+    
+    <!-- Partículas suaves -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particle absolute w-2 h-2 bg-teal-300 rounded-full opacity-40 animate-bounce" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+      <div class="particle absolute w-3 h-3 bg-cyan-300 rounded-full opacity-50 animate-bounce" style="top: 30%; left: 80%; animation-delay: 1s;"></div>
+      <div class="particle absolute w-1 h-1 bg-emerald-300 rounded-full opacity-40 animate-bounce" style="top: 60%; left: 20%; animation-delay: 2s;"></div>
+      <div class="particle absolute w-2 h-2 bg-teal-400 rounded-full opacity-30 animate-bounce" style="top: 70%; left: 70%; animation-delay: 0.5s;"></div>
+      <div class="particle absolute w-3 h-3 bg-cyan-400 rounded-full opacity-35 animate-bounce" style="top: 40%; left: 50%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
+      <div class="text-center max-w-5xl mx-auto">
+        
+        <!-- Título principal con animación -->
+        <div class="mb-8 animate-fade-in">
+          <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-teal-800 mb-4 drop-shadow-lg">
+            🌿 Tranquila 🌿
+          </h1>
+          <p class="text-xl md:text-2xl text-teal-700 font-light italic">
+            Tu serenidad es un regalo para el mundo
+          </p>
+        </div>
+
+        <!-- Sección de fotos -->
+        <div class="mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Foto 1 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-teal-100 to-cyan-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-tranquila-1.jpg" 
+                  alt="Momentos de paz juntos" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-teal-700">
+                  <span class="text-4xl mb-2">🌿</span>
+                  <p class="text-sm text-center">Momentos de paz juntos</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 2 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-cyan-100 to-emerald-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-tranquila-2.jpg" 
+                  alt="Tu serenidad natural" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-cyan-700">
+                  <span class="text-4xl mb-2">🧘‍♀️</span>
+                  <p class="text-sm text-center">Tu serenidad natural</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Foto 3 -->
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 transform hover:scale-105 transition-all duration-300">
+              <div class="aspect-square bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl flex items-center justify-center">
+                <img 
+                  src="/images/foto-tranquila-3.jpg" 
+                  alt="Espacios de calma" 
+                  class="w-full h-full object-cover rounded-xl"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden flex-col items-center justify-center text-emerald-700">
+                  <span class="text-4xl mb-2">🍃</span>
+                  <p class="text-sm text-center">Espacios de calma</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mensaje principal -->
+        <div class="bg-white/40 backdrop-blur-md rounded-3xl p-8 md:p-12 mb-8 animate-slide-up" style="animation-delay: 0.3s;">
+          <div class="text-teal-900 space-y-6">
+            <p class="text-lg md:text-xl leading-relaxed">
+              Tu tranquilidad es como un oasis en medio del caos. Cuando te sientes en paz, 
+              todo a tu alrededor se vuelve más suave y armonioso. Tu serenidad me calma 
+              y me hace sentir que todo está bien en el mundo.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed">
+              Me encanta verte tranquila, con esa paz interior que irradias y esa calma 
+              que contagias a todos los que te rodean. Tu tranquilidad es un regalo 
+              que compartes generosamente, y yo soy el más afortunado de recibirlo.
+            </p>
+            
+            <p class="text-lg md:text-xl leading-relaxed font-medium">
+              ¡Que tu paz interior sea eterna, mi amor! 🌿✨
+            </p>
+          </div>
+        </div>
+
+        <!-- Frases especiales -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div class="bg-gradient-to-r from-teal-300 to-cyan-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.4s;">
+            <p class="text-teal-900 text-lg font-medium">
+              "Tu tranquilidad es mi refugio" 🏡
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-cyan-300 to-emerald-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.5s;">
+            <p class="text-teal-900 text-lg font-medium">
+              "Contigo, todo es más sereno" 🌊
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-emerald-300 to-teal-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.6s;">
+            <p class="text-teal-900 text-lg font-medium">
+              "Tu paz es mi medicina" 💚
+            </p>
+          </div>
+          
+          <div class="bg-gradient-to-r from-teal-300 to-cyan-300 rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-slide-up" style="animation-delay: 0.7s;">
+            <p class="text-teal-900 text-lg font-medium">
+              "Eres mi oasis de calma" 🏝️
+            </p>
+          </div>
+        </div>
+
+        <!-- Botón para volver -->
+        <div class="animate-fade-in" style="animation-delay: 0.8s;">
+          <a 
+            href="/" 
+            class="inline-block bg-teal-600/80 backdrop-blur-sm text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-teal-600 transition-all duration-300 transform hover:scale-105 border-2 border-teal-500/30 hover:border-teal-500/50"
+          >
+            ← Volver al inicio
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+    opacity: 0;
+  }
+  
+  .particle {
+    animation: bounce 3s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
+  }
+</style>

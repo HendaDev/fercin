@@ -1,0 +1,376 @@
+---
+import '@fontsource-variable/josefin-sans'
+import "../styles/global.css";
+
+export interface Props{
+  title: string;
+  description: string;
+}
+
+const { title, description = "Un espacio para que vengas cuando te identifiques con alguna emoción" } = Astro.props;
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<div class="absolute top-0 z-[-2] h-screen w-screen bg-[#000000] bg-[radial-gradient(#ffffff33_1px,#00091d_1px)] bg-[size:20px_20px]"></div>
+		
+		<!-- Elementos de audio ocultos -->
+		
+
+		<!-- Control de audio flotante -->
+		<button 
+			id="audioControl"
+			class="fixed bottom-4 right-4 z-50 bg-white/20 backdrop-blur-sm p-4 rounded-full hover:bg-white/30 transition-all duration-300 shadow-lg"
+			title="Controlar música"
+		>
+			<span id="audioIcon">🎵</span>
+		</button>
+
+		<slot />
+
+		<script>
+			// Declarar tipos para evitar errores de TypeScript
+			declare global {
+				interface Window {
+					persistentAudioManager: any;
+				}
+			}
+
+			// Sistema de audio persistente entre navegaciones
+			(function() {
+				// Verificar si ya existe una instancia global
+				if (window.persistentAudioManager) {
+					return;
+				}
+
+				class PersistentAudioManager {
+					// @ts-ignore
+					private audios: any[];
+					// @ts-ignore
+					private currentAudioIndex: number;
+					// @ts-ignore
+					private isPlaying: boolean;
+					// @ts-ignore
+					private isMuted: boolean;
+					// @ts-ignore
+					private audioElement: HTMLAudioElement | null;
+					// @ts-ignore
+					private controlButton: HTMLElement | null;
+					// @ts-ignore
+					private audioIcon: HTMLElement | null;
+					// @ts-ignore
+					private isInitialized: boolean;
+
+					constructor() {
+						// @ts-ignore
+						this.audios = [
+							{ id: 'song1', src: '/audio/DoBetter.mp3' },
+							{ id: 'song2', src: '/audio/420.mp3' },
+							{ id: 'song3', src: '/audio/Momento.mp3' }
+						];
+						// @ts-ignore
+						this.currentAudioIndex = 0;
+						// @ts-ignore
+						this.isPlaying = false;
+						// @ts-ignore
+						this.isMuted = false;
+						// @ts-ignore
+						this.audioElement = null;
+						// @ts-ignore
+						this.controlButton = null;
+						// @ts-ignore
+						this.audioIcon = null;
+						// @ts-ignore
+						this.isInitialized = false;
+						
+						this.init();
+					}
+
+					init() {
+						// Solo inicializar una vez
+						// @ts-ignore
+						if (this.isInitialized) return;
+						
+						this.restoreState();
+						this.createAudioElement();
+						this.setupEventListeners();
+						
+						// NO iniciar reproducción automática - solo cuando el usuario haga clic
+						// @ts-ignore
+						this.isInitialized = true;
+					}
+
+					restoreState() {
+						try {
+							const savedState = localStorage.getItem('audioState');
+							if (savedState) {
+								const state = JSON.parse(savedState);
+								// @ts-ignore
+								this.isPlaying = state.isPlaying || false;
+								// @ts-ignore
+								this.isMuted = state.isMuted || false;
+								// @ts-ignore
+								this.currentAudioIndex = state.currentAudioIndex || 0;
+							}
+						} catch (error) {
+							console.log('Error restaurando estado de audio:', error);
+						}
+					}
+
+					saveState() {
+						try {
+							const state = {
+								// @ts-ignore
+								isPlaying: this.isPlaying,
+								// @ts-ignore
+								isMuted: this.isMuted,
+								// @ts-ignore
+								currentAudioIndex: this.currentAudioIndex,
+								// @ts-ignore
+								audioSrc: this.audioElement ? this.audioElement.src : null,
+								// @ts-ignore
+								currentTime: this.audioElement ? this.audioElement.currentTime : 0
+							};
+							localStorage.setItem('audioState', JSON.stringify(state));
+						} catch (error) {
+							console.log('Error guardando estado de audio:', error);
+						}
+					}
+
+					createAudioElement() {
+						// Crear elemento de audio si no existe
+						// @ts-ignore
+						if (!this.audioElement) {
+							// @ts-ignore
+							this.audioElement = new Audio();
+							// @ts-ignore
+							this.audioElement.preload = 'auto';
+							// @ts-ignore
+							this.audioElement.volume = 0.3;
+							
+							// Restaurar audio si hay estado guardado
+							const savedState = localStorage.getItem('audioState');
+							if (savedState) {
+								const state = JSON.parse(savedState);
+								if (state.audioSrc) {
+									// @ts-ignore
+									this.audioElement.src = state.audioSrc;
+									// @ts-ignore
+									this.audioElement.currentTime = state.currentTime || 0;
+									
+									// Continuar reproducción si estaba activa
+									// @ts-ignore
+									if (state.isPlaying && !state.isMuted) {
+										setTimeout(() => {
+											// @ts-ignore
+											this.audioElement.play().catch(() => {
+												this.playRandomAudio();
+											});
+										}, 500);
+									}
+								}
+							}
+							
+							// Configurar eventos
+							// @ts-ignore
+							this.audioElement.addEventListener('ended', () => {
+								this.playNextRandom();
+							});
+
+							// @ts-ignore
+							this.audioElement.addEventListener('error', () => {
+								console.log('Error reproduciendo audio, intentando siguiente...');
+								this.playNextRandom();
+							});
+						}
+					}
+
+					setupEventListeners() {
+						// Buscar elementos en el DOM actual
+						// @ts-ignore
+						this.controlButton = document.getElementById('audioControl');
+						// @ts-ignore
+						this.audioIcon = document.getElementById('audioIcon');
+						
+						// @ts-ignore
+						if (this.controlButton) {
+							// Remover listeners anteriores para evitar duplicados
+							// @ts-ignore
+							this.controlButton.removeEventListener('click', this.togglePlayPause.bind(this));
+							// @ts-ignore
+							this.controlButton.addEventListener('click', this.togglePlayPause.bind(this));
+						}
+						
+						// Actualizar icono
+						this.updateIcon();
+					}
+
+					playRandomAudio() {
+						// @ts-ignore
+						if (this.isMuted) return;
+						
+						// @ts-ignore
+						const randomIndex = Math.floor(Math.random() * this.audios.length);
+						// @ts-ignore
+						this.currentAudioIndex = randomIndex;
+						this.playAudio(randomIndex);
+					}
+
+					playNextRandom() {
+						// @ts-ignore
+						if (this.isMuted) return;
+						
+						let nextIndex;
+						do {
+							// @ts-ignore
+							nextIndex = Math.floor(Math.random() * this.audios.length);
+							// @ts-ignore
+						} while (nextIndex === this.currentAudioIndex && this.audios.length > 1);
+						
+						// @ts-ignore
+						this.currentAudioIndex = nextIndex;
+						this.playAudio(nextIndex);
+					}
+
+					playAudio(index: any) {
+						// @ts-ignore
+						const audio = this.audios[index];
+						// @ts-ignore
+						if (this.audioElement) {
+							// @ts-ignore
+							this.audioElement.src = audio.src;
+							
+							// @ts-ignore
+							this.audioElement.play().then(() => {
+								// @ts-ignore
+								this.isPlaying = true;
+								this.updateIcon();
+								this.saveState();
+							}).catch((error: any) => {
+								console.log('Error reproduciendo audio:', error);
+								setTimeout(() => {
+									this.playNextRandom();
+								}, 1000);
+							});
+						}
+					}
+
+					togglePlayPause() {
+						// @ts-ignore
+						if (this.isMuted) {
+							this.unmute();
+						// @ts-ignore
+						} else if (this.isPlaying) {
+							this.pause();
+						} else {
+							this.resume();
+						}
+					}
+
+					pause() {
+						// @ts-ignore
+						if (this.audioElement) {
+							// @ts-ignore
+							this.audioElement.pause();
+							// @ts-ignore
+							this.isPlaying = false;
+							this.updateIcon();
+							this.saveState();
+						}
+					}
+
+					resume() {
+						// @ts-ignore
+						if (this.audioElement && !this.isMuted) {
+							// @ts-ignore
+							this.audioElement.play().then(() => {
+								// @ts-ignore
+								this.isPlaying = true;
+								this.updateIcon();
+								this.saveState();
+							});
+						}
+					}
+
+					mute() {
+						// @ts-ignore
+						this.isMuted = true;
+						// @ts-ignore
+						this.isPlaying = false;
+						// @ts-ignore
+						if (this.audioElement) {
+							// @ts-ignore
+							this.audioElement.pause();
+						}
+						this.updateIcon();
+						this.saveState();
+					}
+
+					unmute() {
+						// @ts-ignore
+						this.isMuted = false;
+						this.playRandomAudio();
+					}
+
+					updateIcon() {
+						// @ts-ignore
+						if (this.audioIcon) {
+							// @ts-ignore
+							if (this.isMuted) {
+								// @ts-ignore
+								this.audioIcon.textContent = '🔇';
+							// @ts-ignore
+							} else if (this.isPlaying) {
+								// @ts-ignore
+								this.audioIcon.textContent = '⏸️';
+							} else {
+								// @ts-ignore
+								this.audioIcon.textContent = '▶️';
+							}
+						}
+					}
+				}
+
+				// Crear instancia global
+				window.persistentAudioManager = new PersistentAudioManager();
+
+				// Función para actualizar controles en cada navegación
+				function updateAudioControls() {
+					if (window.persistentAudioManager) {
+						window.persistentAudioManager.setupEventListeners();
+					}
+				}
+
+				// Actualizar controles cuando el DOM esté listo
+				document.addEventListener('DOMContentLoaded', updateAudioControls);
+
+				// Actualizar controles después de navegaciones de Astro
+				document.addEventListener('astro:page-load', updateAudioControls);
+				
+				// También actualizar en navegaciones normales
+				window.addEventListener('load', updateAudioControls);
+
+			})();
+		</script>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+		font-family: 'Josefin Sans Variable', 'Josefin Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	}
+</style>
